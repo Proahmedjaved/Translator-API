@@ -6,11 +6,13 @@ def translate(text, source, destination):
 
     translation = translator.translate(text.split(" "), dest=destination, src=source)
 
-    dic = {}
+    lst = []
     for t in translation:
-        dic[t.origin] = t.text
-
-    return dic
+        dic = {}
+        dic['word'] = t.origin
+        dic['trans'] = t.text
+        lst.append(dic)
+    return lst
 
 
 
