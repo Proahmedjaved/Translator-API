@@ -1,8 +1,12 @@
-from flask import Flask, request, jsonify, Response
+from flask import Flask, request, jsonify, Response, render_template
 from translate import translate
 import json
 
 app = Flask(__name__)
+
+@app.route('/', methods=['GET'])
+def home():
+    return render_template('home.html')
 
 @app.route('/english_to_french', methods=['POST'])
 def en_to_fr():
@@ -25,7 +29,7 @@ def de_to_fr():
         print('Something went wrong!', str(e))
 
 @app.route('/spanish_to_french', methods=['POST'])
-def home():
+def es_to_fr():
     try:
         return Response(
             json.dumps(translate(request.form['text'], 'es', 'fr')),
