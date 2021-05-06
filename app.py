@@ -1,26 +1,36 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify, Response
 from translate import translate
+import json
 
 app = Flask(__name__)
 
 @app.route('/english_to_french', methods=['POST'])
 def en_to_fr():
     try:
-        return translate(request.form['text'], 'en','fr')
+        return Response(
+            json.dumps(translate(request.form['text'], 'en','fr')),
+            mimetype='application/json'
+        )
     except Exception as e:
         print('Something went wrong!', str(e))
 
 @app.route('/german_to_french', methods=['POST'])
 def de_to_fr():
     try:
-        return translate(request.form['text'], 'de', 'fr')
+        return Response(
+            json.dumps(translate(request.form['text'], 'de', 'fr')),
+            mimetype='application/json'
+        )
     except Exception as e:
         print('Something went wrong!', str(e))
 
 @app.route('/spanish_to_french', methods=['POST'])
 def home():
     try:
-        return translate(request.form['text'], 'es', 'fr')
+        return Response(
+            json.dumps(translate(request.form['text'], 'es', 'fr')),
+            mimetype='application/json'
+        )
     except Exception as e:
         print('Something went wrong!', str(e)) 
 
